@@ -1,0 +1,105 @@
+have_header: checking for jni.h... -------------------- yes
+
+"gcc -E -I. -I/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/i686-darwin10.5.0 -I. -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include"  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE   -g -O2  -fno-common -pipe -fno-common   -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include"  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <jni.h>
+/* end */
+
+--------------------
+
+have_header: checking for dl.h... -------------------- yes
+
+"gcc -E -I. -I/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/i686-darwin10.5.0 -I. -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include"  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE   -g -O2  -fno-common -pipe -fno-common   -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include"  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <dl.h>
+/* end */
+
+--------------------
+
+have_func: checking for locale_charset() in iconv.h... -------------------- no
+
+"gcc -o conftest -I. -I/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/i686-darwin10.5.0 -I. -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include"  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE   -g -O2  -fno-common -pipe -fno-common   -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include" conftest.c  -L. -L/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib -L.      -lruby-static  -ldl -lobjc  "
+conftest.c: In function ‘t’:
+conftest.c:5: error: ‘locale_charset’ undeclared (first use in this function)
+conftest.c:5: error: (Each undeclared identifier is reported only once
+conftest.c:5: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: #include <iconv.h>
+2: 
+3: /*top*/
+4: int main() { return 0; }
+5: int t() { void ((*volatile p)()); p = (void ((*)()))locale_charset; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/i686-darwin10.5.0 -I. -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include"  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE   -g -O2  -fno-common -pipe -fno-common   -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include" conftest.c  -L. -L/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib -L.      -lruby-static  -ldl -lobjc  "
+Undefined symbols:
+  "_locale_charset", referenced from:
+      _t in ccw0uKGi.o
+ld: symbol(s) not found
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include <iconv.h>
+2: 
+3: /*top*/
+4: int main() { return 0; }
+5: int t() { locale_charset(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for nl_langinfo() in langinfo.h... -------------------- yes
+
+"gcc -o conftest -I. -I/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/i686-darwin10.5.0 -I. -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include"  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE   -g -O2  -fno-common -pipe -fno-common   -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include" conftest.c  -L. -L/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib -L.      -lruby-static  -ldl -lobjc  "
+checked program was:
+/* begin */
+1: #include <langinfo.h>
+2: 
+3: /*top*/
+4: int main() { return 0; }
+5: int t() { void ((*volatile p)()); p = (void ((*)()))nl_langinfo; return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for setlocale() in locale.h... -------------------- yes
+
+"gcc -o conftest -I. -I/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/i686-darwin10.5.0 -I. -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include"  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE   -g -O2  -fno-common -pipe -fno-common   -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include" conftest.c  -L. -L/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib -L.      -lruby-static  -ldl -lobjc  "
+checked program was:
+/* begin */
+1: #include <locale.h>
+2: 
+3: /*top*/
+4: int main() { return 0; }
+5: int t() { void ((*volatile p)()); p = (void ((*)()))setlocale; return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for getenv()... -------------------- yes
+
+"gcc -o conftest -I. -I/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/i686-darwin10.5.0 -I. -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include"  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE   -g -O2  -fno-common -pipe -fno-common   -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include" conftest.c  -L. -L/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib -L.      -lruby-static  -ldl -lobjc  "
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘getenv’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))getenv; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/i686-darwin10.5.0 -I. -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include"  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE   -g -O2  -fno-common -pipe -fno-common   -I"/Library/Java/JavaVirtualMachines/1.6.0_24-b07-334.jdk/Contents/Home/include" conftest.c  -L. -L/Users/lgleason/.rvm/rubies/ruby-1.8.7-p302/lib -L.      -lruby-static  -ldl -lobjc  "
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { getenv(); return 0; }
+/* end */
+
+--------------------
+

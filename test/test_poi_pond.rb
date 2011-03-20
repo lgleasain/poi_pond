@@ -1,7 +1,22 @@
 require 'helper'
+require 'rjb'
 
 class TestPoiPond < Test::Unit::TestCase
-  should "probably rename this file and start testing for real" do
-    flunk "hey buddy, you should probably rename this file and start testing for real"
+  context "initialize" do
+    should "initialize rjb and return a valid object" do
+      POIPond.initialize
+      assert_not_nil Rjb::import('org.apache.poi.hssf.usermodel.HSSFWorkbook').new
+    end
+  end
+  
+  context "spreadsheet" do
+    setup do
+      POIPond.initialize
+    end
+    
+    should "create a workbook" do
+      workbook = POIPond.create_workbook
+      assert workbook.createSheet("sheet1")
+    end
   end
 end
