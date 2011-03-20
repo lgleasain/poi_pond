@@ -1,6 +1,15 @@
 = poi_pond
 
-Description goes here.
+This is a gem to encapsulate the Apache Java POI library for use in a native (non jruby) environment.  
+
+== History
+My motivation for creating this gem was the need to create an excel spreadsheet in Ruby that offers some advanced features that currently do not exist in other Ruby Excel generator gems.  POI has a gem that is supposed to compile POI as a native Ruby extension.  I tried it and had a lot of problems with it and finally gave up on that approach.  I really didn't feel like converting my project to jruby just to use POI,  and using an approach that required running a JVM based process in the background or doing system calls just seemed wrong.  So I created POI pond which uses RJB to access the the jvm,  load POI and encapsulate the poi functions in a form that is not as doing direct RJB/POI calls.
+
+== Dependencies
+You will need to have a jvm installed and in your path to work correctly.  At the time of this writing this gem has only been tested on MacOS version 10.6.6.  Your mileage may vary.
+
+== Conventions 
+This is a light wrapper around POI which is a Java library.  If a method is added by the gem it follows standard Ruby conventions ie: my_method_name.  If a a method is coming directly from the POI java library it follows the Java camel case convention myMethodName.  My thought is that it would make it easier to know where to look for documentation etc. following that approach.  If this really bothers you send me a message or just fork the project and add some wrappers to make things more ruby like.  As long as you have good tests around you code I will be happy to bring the changes back into the main project.
 
 == Contributing to poi_pond
  
