@@ -3,7 +3,7 @@ coverage
 *.lock
 # rdoc generated
 rdoc
-
+rjb
 # yard generated
 doc
 .yardoc
