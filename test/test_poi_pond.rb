@@ -19,4 +19,14 @@ class TestPoiPond < Test::Unit::TestCase
       assert workbook.createSheet("sheet1")
     end
   end
+  
+  context "style" do
+    setup do
+      POIPond.initialize
+    end
+    
+    should "set POI colors" do
+      
+    end
+  end
 end

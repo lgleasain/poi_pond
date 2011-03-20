@@ -15,16 +15,20 @@ Jeweler::Tasks.new do |gem|
   gem.name = "poi_pond"
   gem.homepage = "http://github.com/lgleasain/poi_pond"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{A gem to user POI in a native (non-jruby) environment}
+  gem.description = %Q{This gem wraps the }
   gem.email = "lgleasain@yahoo.com"
   gem.authors = ["Lance Gleason"]
+  # gem.add_runtime_dependency 'rjb'
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
   #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
 Jeweler::RubygemsDotOrgTasks.new
+# rescue LoadError
+#   puts "Jeweler (or a dependency) not available.  Install it with: gem install jeweler."
+# end
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|

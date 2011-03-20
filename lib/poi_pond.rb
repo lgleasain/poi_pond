@@ -1,6 +1,8 @@
 require 'rjb'
+require 'style'
 
 module POIPond
+  include Style
   def self.initialize 
     Rjb::load(classpath = Dir.glob('./javalibs/**/*.jar').join(':'), jvmargs=[])
   end
