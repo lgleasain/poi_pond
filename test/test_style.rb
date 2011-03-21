@@ -18,5 +18,10 @@ class TestStyle < Test::Unit::TestCase
     should "return a cellStyle object" do
       assert_equal Rjb::import('org.apache.poi.ss.usermodel.CellStyle').ALIGN_LEFT, Style.cell_style.ALIGN_LEFT
     end
+    
+    should "return a hssfCellStyle object" do
+      assert Rjb::import('org.apache.poi.hssf.usermodel.HSSFCellStyle').ALIGN_CENTER, Style.hssf_cell_style.ALIGN_CENTER
+    end
+    
   end  
 end

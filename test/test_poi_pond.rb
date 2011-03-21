@@ -18,15 +18,15 @@ class TestPoiPond < Test::Unit::TestCase
       workbook = POIPond.create_workbook
       assert workbook.createSheet("sheet1")
     end
-  end
-  
-  context "style" do
-    setup do
-      POIPond.initialize
+    
+    should "create a cell range address object" do
+      assert POIPond.create_cell_range_address.valueOf('$A$2')
     end
     
-    should "set POI colors" do
-      
+    should "create a HSSFDataFormat object" do
+      reference_built_in_format = Rjb::import('org.apache.poi.hssf.usermodel.HSSFDataFormat').getBuiltinFormat("m/d/yy h:mm")
+      assert_equal reference_built_in_format, POIPond.hssf_data_format.getBuiltinFormat("m/d/yy h:mm")
     end
   end
+  
 end
