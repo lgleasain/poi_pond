@@ -18,4 +18,8 @@ module POIPond
   def hssf_data_format
     Rjb::import('org.apache.poi.hssf.usermodel.HSSFDataFormat')
   end
+  
+  def poi_file(file)
+    Rjb::import('java.io.FileOutputStream').new(file)
+  end
 end 
