@@ -4,7 +4,13 @@ require 'style'
 module POIPond
   include Style
   def initialize_poi 
-    Rjb::load(classpath = Dir.glob('./javalibs/**/*.jar').join(':'), jvmargs=[])
+    dir = File.join(File.dirname(File.dirname(__FILE__)), 'javalibs')
+    if File.exist?(dir)
+      jardir = File.join(File.dirname(File.dirname(__FILE__)), 'javalibs', '**', '*.jar')
+    else
+      jardir = File.join('.','javalibs', '**', '*.jar')
+    end
+    Rjb::load(classpath = Dir.glob(jardir).join(':'), jvmargs=[])
   end
   
   def create_excel_workbook
