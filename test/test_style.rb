@@ -60,5 +60,70 @@ class TestStyle < Test::Unit::TestCase
       assert_equal excel_cell_style.VERTICAL_TOP, 
                    create_cell_style(create_excel_workbook, {:vertical_alignment => 'VERTICAL_TOP'}).getVerticalAlignment
     end
+    
+    should "set the font weight to bold" do
+      my_font = create_cell_style(create_excel_workbook, {:bold => true}).get_font
+      assert_equal my_font.BOLDWEIGHT_BOLD, my_font.getBoldweight
+    end
+    
+    should "not set the font to bold if no bold setting is specified" do
+      my_font = create_cell_style(create_excel_workbook, {}).get_font
+      assert_equal my_font.BOLDWEIGHT_NORMAL, my_font.getBoldweight
+    end
+    
+    should "set a left border for the cell" do
+      assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border_left => 'BORDER_MEDIUM'}).getBorderLeft
+    end
+    
+    should "not set a left border for a cell if a invalid one is specified" do
+      assert_equal create_cell_style(create_excel_workbook, {}).getBorderLeft,
+                    create_cell_style(create_excel_workbook, {:border_left => 'foo'}).getBorderLeft
+    end
+
+    should "set a right border for the cell" do
+      assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border_right => 'BORDER_MEDIUM'}).getBorderRight
+    end
+    
+    should "not set a right border for a cell if none is specified" do
+      assert_equal create_cell_style(create_excel_workbook, {}).getBorderRight,
+                    create_cell_style(create_excel_workbook, {:border_right => 'foo'}).getBorderRight
+    end
+
+    should "set a top border for the cell" do
+      assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border_top => 'BORDER_MEDIUM'}).getBorderTop
+    end
+    
+    should "not set a top border for a cell if none is specified" do
+      assert_equal create_cell_style(create_excel_workbook, {}).getBorderTop,
+                    create_cell_style(create_excel_workbook, {:border_top => 'foo'}).getBorderTop
+    end
+
+    should "set a bottom border for the cell" do
+      assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border_bottom => 'BORDER_MEDIUM'}).getBorderBottom
+    end
+    
+    should "not set a bottom border for a cell if none is specified" do
+      assert_equal create_cell_style(create_excel_workbook, {}).getBorderBottom,
+                    create_cell_style(create_excel_workbook, {:border_bottom => 'foo'}).getBorderBottom
+    end
+
+    should "set a border for the cell" do
+      assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border => 'BORDER_MEDIUM'}).getBorderBottom
+      assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border => 'BORDER_MEDIUM'}).getBorderTop
+      assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border => 'BORDER_MEDIUM'}).getBorderLeft
+      assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border => 'BORDER_MEDIUM'}).getBorderRight
+    end
+    
+    should "not set a border for a cell if none is specified" do
+      assert_equal create_cell_style(create_excel_workbook, {}).getBorderBottom,
+                    create_cell_style(create_excel_workbook, {:border_bottom => 'foo'}).getBorderBottom
+      assert_equal create_cell_style(create_excel_workbook, {}).getBorderTop,
+                    create_cell_style(create_excel_workbook, {:border_bottom => 'foo'}).getBorderTop
+      assert_equal create_cell_style(create_excel_workbook, {}).getBorderLeft,
+                    create_cell_style(create_excel_workbook, {:border_bottom => 'foo'}).getBorderLeft
+      assert_equal create_cell_style(create_excel_workbook, {}).getBorderRight,
+                    create_cell_style(create_excel_workbook, {:border_bottom => 'foo'}).getBorderRight
+    end
+
   end  
 end
