@@ -44,8 +44,20 @@ module POIPond
   
   def create_spreadsheet(options)
     workbook = create_excel_workbook
-    options.each do |sheet|
-      workbook.createSheet sheet[:sheet][:name]
+    options.each do |sheet_hash|
+      sheet = workbook.createSheet sheet_hash[:sheet][:name]
+      sheet.setPrintGridlines(!!sheet_hash[:sheet][:print_grid_lines]) 
+      sheet.setDisplayGridlines(!!sheet_hash[:sheet][:display_grid_lines])
+      if sheet_hash[:sheet][:row] 
+        sheet_hash[:sheet][:row].each do |row_hash|
+          row = sheet.createRow row_hash[:row_index]
+          if row_hash[:cell]
+            row_hash[:cell].each do |cell_hash|
+              row.createCell cell_hash[:cell_index]
+            end
+          end
+        end
+      end 
     end
     workbook
   end  

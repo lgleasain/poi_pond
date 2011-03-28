@@ -32,10 +32,13 @@ class TestPoiPond < Test::Unit::TestCase
     
       should "create a FileOutputStream object" do
         assert_equal Rjb::import('java.io.FileOutputStream').new('foo').java_methods, poi_output_file('foo').java_methods
+        File.delete 'foo'
       end
 
       should "create a FileInputStream object" do
+        poi_output_file('foo')
         assert_equal Rjb::import('java.io.FileInputStream').new('foo').java_methods, poi_input_file('foo').java_methods
+        File.delete 'foo'
       end
     
       should "create a image and place it on a worksheet" do
@@ -59,6 +62,36 @@ class TestPoiPond < Test::Unit::TestCase
         spreadsheet = create_spreadsheet([{:sheet => {:name => 'sheet1'}}, {:sheet => {:name => 'sheet2'}}])
         assert_not_nil spreadsheet.getSheet('sheet1')
         assert_not_nil spreadsheet.getSheet('sheet2')
+      end
+      
+      should "set printGridlines to true for sheet1" do
+        assert create_spreadsheet([:sheet => {:name => 'sheet1', :print_grid_lines => true}]).getSheet('sheet1').isPrintGridlines
+      end
+      
+      should "set displayGridlines to false for sheet1" do
+        assert !create_spreadsheet([:sheet => {:name => 'sheet1', :display_grid_lines => false}]).getSheet('sheet1').isDisplayGridlines
+      end
+      
+      should "create a row 1" do
+        assert create_spreadsheet([:sheet => {:name => 'sheet1', :row => [{:row_index => 1}]}]).getSheet('sheet1').getRow(1)
+      end
+      
+      should "create row 3 and 7" do
+        sheet = create_spreadsheet([:sheet => {:name => 'sheet1', :row => [{:row_index => 3}, {:row_index => 7}]}]).getSheet('sheet1')
+        assert sheet.getRow(3)
+        assert sheet.getRow(7)
+      end
+      
+      should "create cell 1" do
+        assert create_spreadsheet([:sheet => {:name => 'sheet1', 
+                          :row => [{:row_index => 1, :cell => [{:cell_index => 1}]}]}]).getSheet('sheet1').getRow(1).getCell(1)
+      end
+
+      should "create cell 2 and 6" do
+        sheet = create_spreadsheet([:sheet => {:name => 'sheet1', 
+                          :row => [{:row_index => 1, :cell => [{:cell_index => 2}, {:cell_index => 6}]}]}]).getSheet('sheet1')
+        assert sheet.getRow(1).getCell(2)
+        assert sheet.getRow(1).getCell(6)
       end
     end
   end
