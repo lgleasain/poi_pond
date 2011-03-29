@@ -93,6 +93,26 @@ class TestPoiPond < Test::Unit::TestCase
         assert sheet.getRow(1).getCell(2)
         assert sheet.getRow(1).getCell(6)
       end
+      
+      should "create a cell at row 3 cell 3 with the text hello" do
+        sheet = create_spreadsheet([:sheet => {:name => 'sheet1', 
+                          :row => [{:row_index => 3, :cell => [{:cell_index => 3, :value => 'hello'}]}]}]).getSheet('sheet1')
+        assert_equal 'hello', sheet.getRow(3).getCell(3).getStringCellValue
+      end
+      
+      should "create a merged cell region from row 3 column 2 to row 5 column 10" do
+        sheet = create_spreadsheet([:sheet => {:name => 'sheet1', :merged_regions => [{:start_row => 3, :start_column => 2, 
+                          :end_row => 5, :end_column => 10}]}]).getSheet('sheet1')
+        assert_equal 'B3:J5', sheet.getMergedRegion(0).formatAsString
+      end
+
+      should "create a merged cell region from row 3 column 2 to row 5 column 10 and one from row 10 column 1 to row 15 column 20" do
+        sheet = create_spreadsheet([:sheet => {:name => 'sheet1', :merged_regions => [{:start_row => 3, :start_column => 2, 
+                            :end_row => 5, :end_column => 10}, {:start_row => 10, :start_column => 1, :end_row => 15, 
+                            :end_column => 20}]}]).getSheet('sheet1')
+        assert_equal 'B3:J5', sheet.getMergedRegion(0).formatAsString
+        assert_equal 'A10:T15', sheet.getMergedRegion(1).formatAsString
+      end
     end
   end
 end

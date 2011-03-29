@@ -48,12 +48,19 @@ module POIPond
       sheet = workbook.createSheet sheet_hash[:sheet][:name]
       sheet.setPrintGridlines(!!sheet_hash[:sheet][:print_grid_lines]) 
       sheet.setDisplayGridlines(!!sheet_hash[:sheet][:display_grid_lines])
+      if sheet_hash[:sheet][:merged_regions]
+        sheet_hash[:sheet][:merged_regions].each do |merged_region|
+          sheet.addMergedRegion create_excel_cell_range_address.new(merged_region[:start_row] - 1, merged_region[:end_row] - 1,
+                                                                    merged_region[:start_column] - 1, merged_region[:end_column] - 1)
+        end
+      end
       if sheet_hash[:sheet][:row] 
         sheet_hash[:sheet][:row].each do |row_hash|
           row = sheet.createRow row_hash[:row_index]
           if row_hash[:cell]
             row_hash[:cell].each do |cell_hash|
-              row.createCell cell_hash[:cell_index]
+              cell = row.createCell cell_hash[:cell_index]
+              cell_hash[:value] ? cell.setCellValue(cell_hash[:value]) : nil
             end
           end
         end
