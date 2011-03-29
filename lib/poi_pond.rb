@@ -60,6 +60,11 @@ module POIPond
                                                                     merged_region[:start_column] - 1, merged_region[:end_column] - 1)
         end
       end
+      if sheet_hash[:sheet][:column_widths]
+        sheet_hash[:sheet][:column_widths].each do |column_width|
+          sheet.setColumnWidth column_width.first, column_width.last
+        end
+      end
       if sheet_hash[:sheet][:row] 
         sheet_hash[:sheet][:row].each do |row_hash|
           row = sheet.createRow row_hash[:row_index]

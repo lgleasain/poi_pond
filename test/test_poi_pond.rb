@@ -127,6 +127,17 @@ class TestPoiPond < Test::Unit::TestCase
         assert_equal 24, sheet.getRow(1).getCell(1).getCellStyle.getFont(sheet.getWorkbook).getFontHeightInPoints
         assert_equal 34, sheet.getRow(1).getCell(2).getCellStyle.getFont(sheet.getWorkbook).getFontHeightInPoints
       end
+      
+      should "set the column 1 width to 666" do
+        assert_equal 666, 
+                      create_spreadsheet([:sheet => {:name => 'sh1', :column_widths => { 1 => 666}}]).getSheet('sh1').getColumnWidth(1)
+      end
+      
+      should "set the column 1 width to 666 and column 3 width to 2323" do
+        sheet = create_spreadsheet([:sheet => {:name => 'sheet1', :column_widths => { 1 => 666, 3 => 2323}}]).getSheet('sheet1')
+        assert_equal 666, sheet.getColumnWidth(1)
+        assert_equal 2323, sheet.getColumnWidth(3)
+      end
     end
   end
 end
