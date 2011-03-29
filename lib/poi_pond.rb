@@ -42,8 +42,14 @@ module POIPond
     drawing.createPicture(anchor, picture_index).resize
   end
   
-  def create_spreadsheet(options)
+  def create_spreadsheet(options, passed_styles = nil)
     workbook = create_excel_workbook
+    if passed_styles
+      styles = {}
+      passed_styles.each do |style|
+        styles[style.first] = create_cell_style workbook, style.last
+      end
+    end
     options.each do |sheet_hash|
       sheet = workbook.createSheet sheet_hash[:sheet][:name]
       sheet.setPrintGridlines(!!sheet_hash[:sheet][:print_grid_lines]) 
@@ -61,6 +67,7 @@ module POIPond
             row_hash[:cell].each do |cell_hash|
               cell = row.createCell cell_hash[:cell_index]
               cell_hash[:value] ? cell.setCellValue(cell_hash[:value]) : nil
+              cell_hash[:style] ? cell.setCellStyle(styles[cell_hash[:style]]) : nil
             end
           end
         end

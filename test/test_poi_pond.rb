@@ -113,6 +113,20 @@ class TestPoiPond < Test::Unit::TestCase
         assert_equal 'B3:J5', sheet.getMergedRegion(0).formatAsString
         assert_equal 'A10:T15', sheet.getMergedRegion(1).formatAsString
       end
+      
+      should "create a cell with a 24 point font" do
+        sheet = create_spreadsheet([:sheet => {:name => 'sheet1', :row => [{:row_index => 1, :cell => [{:cell_index => 1, 
+                                    :style => 'title'}]}]}], {'title' => {:font_height => 24}}).getSheet('sheet1')
+        assert_equal 24, sheet.getRow(1).getCell(1).getCellStyle.getFont(sheet.getWorkbook).getFontHeightInPoints
+      end
+      
+      should "create a cell with a 24 point font and another one with a 34 point one" do
+        sheet = create_spreadsheet([:sheet => {:name => 'sheet1', :row => [{:row_index => 1, :cell => [{:cell_index => 1, 
+                                      :style => 'title'}, {:cell_index => 2, :style => 'text'}]}]}], {'title' => 
+                                      {:font_height => 24}, 'text' => {:font_height => 34}}).getSheet('sheet1')
+        assert_equal 24, sheet.getRow(1).getCell(1).getCellStyle.getFont(sheet.getWorkbook).getFontHeightInPoints
+        assert_equal 34, sheet.getRow(1).getCell(2).getCellStyle.getFont(sheet.getWorkbook).getFontHeightInPoints
+      end
     end
   end
 end
