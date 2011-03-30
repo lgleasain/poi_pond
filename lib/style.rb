@@ -30,14 +30,30 @@ module Style
                             style.setBorderTop(excel_cell_style.send(options[:border_top])) : nil}
     nil_out_runtime_error { options[:border_bottom] ? 
                             style.setBorderBottom(excel_cell_style.send(options[:border_bottom])) : nil }
+    options[:border_left_color] && poi_color(options[:border_left_color]) ? 
+                            style.setLeftBorderColor(poi_color options[:border_left_color]) : nil
+    options[:border_right_color] && poi_color(options[:border_right_color]) ? 
+                            style.setRightBorderColor(poi_color options[:border_right_color]) : nil
+    options[:border_top_color] && poi_color(options[:border_top_color]) ? 
+                            style.setTopBorderColor(poi_color options[:border_top_color]) : nil
+    options[:border_bottom_color] && poi_color(options[:border_bottom_color]) ? 
+                            style.setBottomBorderColor(poi_color options[:border_bottom_color]) : nil
 
-    if(options[:border])
+
+    if options[:border]
       nil_out_runtime_error {
-                              style.setBorderBottom(excel_cell_style.send(options[:border]))
-                              style.setBorderTop(excel_cell_style.send(options[:border]))
-                              style.setBorderLeft(excel_cell_style.send(options[:border]))
-                              style.setBorderRight(excel_cell_style.send(options[:border]))
+                              style.setBorderBottom excel_cell_style.send(options[:border])
+                              style.setBorderTop excel_cell_style.send(options[:border])
+                              style.setBorderLeft excel_cell_style.send(options[:border])
+                              style.setBorderRight excel_cell_style.send(options[:border])
       }
+    end
+
+    if options[:border_color] && poi_color(options[:border_color])
+      style.setTopBorderColor poi_color(options[:border_color])
+      style.setBottomBorderColor poi_color(options[:border_color])
+      style.setLeftBorderColor poi_color(options[:border_color])
+      style.setRightBorderColor poi_color(options[:border_color])
     end
 
     if options[:background_color] && poi_color(options[:background_color])
