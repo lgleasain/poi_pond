@@ -84,7 +84,7 @@ class TestStyle < Test::Unit::TestCase
       assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border_right => 'BORDER_MEDIUM'}).getBorderRight
     end
     
-    should "not set a right border for a cell if none is specified" do
+    should "not set a right border for a cell if a invalid one is specified" do
       assert_equal create_cell_style(create_excel_workbook, {}).getBorderRight,
                     create_cell_style(create_excel_workbook, {:border_right => 'foo'}).getBorderRight
     end
@@ -93,7 +93,7 @@ class TestStyle < Test::Unit::TestCase
       assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border_top => 'BORDER_MEDIUM'}).getBorderTop
     end
     
-    should "not set a top border for a cell if none is specified" do
+    should "not set a top border for a cell if a invalid one is specified" do
       assert_equal create_cell_style(create_excel_workbook, {}).getBorderTop,
                     create_cell_style(create_excel_workbook, {:border_top => 'foo'}).getBorderTop
     end
@@ -102,7 +102,7 @@ class TestStyle < Test::Unit::TestCase
       assert_equal excel_cell_style.BORDER_MEDIUM, create_cell_style(create_excel_workbook, {:border_bottom => 'BORDER_MEDIUM'}).getBorderBottom
     end
     
-    should "not set a bottom border for a cell if none is specified" do
+    should "not set a bottom border for a cell if a invalid one is specified" do
       assert_equal create_cell_style(create_excel_workbook, {}).getBorderBottom,
                     create_cell_style(create_excel_workbook, {:border_bottom => 'foo'}).getBorderBottom
     end
@@ -125,5 +125,13 @@ class TestStyle < Test::Unit::TestCase
                     create_cell_style(create_excel_workbook, {:border_bottom => 'foo'}).getBorderRight
     end
 
+    should "set the background color to DARK_BLUE" do
+      assert_equal poi_color('DARK_BLUE'), create_cell_style(create_excel_workbook, {:background_color => 'DARK_BLUE'}).getFillForegroundColor
+    end
+    
+    should "not set a background color if a invalid one is specified" do
+      assert_equal create_cell_style(create_excel_workbook, {}).getFillForegroundColor, 
+                    create_cell_style(create_excel_workbook, {:background_color => 'foo'}).getFillForegroundColor
+    end
   end  
 end

@@ -56,8 +56,8 @@ module POIPond
       sheet.setDisplayGridlines(!!sheet_hash[:sheet][:display_grid_lines])
       if sheet_hash[:sheet][:merged_regions]
         sheet_hash[:sheet][:merged_regions].each do |merged_region|
-          sheet.addMergedRegion create_excel_cell_range_address.new(merged_region[:start_row] - 1, merged_region[:end_row] - 1,
-                                                                    merged_region[:start_column] - 1, merged_region[:end_column] - 1)
+          sheet.addMergedRegion create_excel_cell_range_address.new(merged_region[:start_row], merged_region[:end_row],
+                                                                    merged_region[:start_column], merged_region[:end_column])
         end
       end
       if sheet_hash[:sheet][:column_widths]
