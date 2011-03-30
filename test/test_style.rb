@@ -126,12 +126,12 @@ class TestStyle < Test::Unit::TestCase
     end
 
     should "set the background color to DARK_BLUE" do
-      assert_equal poi_color('DARK_BLUE'), create_cell_style(create_excel_workbook, {:background_color => 'DARK_BLUE'}).getFillForegroundColor
+      assert_equal poi_color('DARK_BLUE'), create_cell_style(create_excel_workbook, {:background_color => 'DARK_BLUE'}).getFillBackgroundColor
     end
     
     should "not set a background color if a invalid one is specified" do
-      assert_equal create_cell_style(create_excel_workbook, {}).getFillForegroundColor, 
-                    create_cell_style(create_excel_workbook, {:background_color => 'foo'}).getFillForegroundColor
+      assert_equal create_cell_style(create_excel_workbook, {}).getFillBackgroundColor, 
+                    create_cell_style(create_excel_workbook, {:background_color => 'foo'}).getFillBackgroundColor
     end
   end  
 end

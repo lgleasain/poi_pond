@@ -16,8 +16,6 @@ module Style
     style = workbook.createCellStyle
     options[:font_height] ? workbook_font.setFontHeightInPoints(options[:font_height]) : nil
     options[:font_color] && poi_color(options[:font_color]) ? workbook_font.setColor(poi_color(options[:font_color])) : nil
-    options[:background_color] && poi_color(options[:background_color]) ? 
-                                  style.setFillForegroundColor(poi_color(options[:background_color])) : nil
     options[:font_name] ? workbook_font.setFontName(options[:font_name]) : nil
     options[:bold] ? workbook_font.setBoldweight(workbook_font.BOLDWEIGHT_BOLD) : nil
     nil_out_runtime_error {options[:horizontal_alignment] ? 
@@ -40,6 +38,11 @@ module Style
                               style.setBorderLeft(excel_cell_style.send(options[:border]))
                               style.setBorderRight(excel_cell_style.send(options[:border]))
       }
+    end
+
+    if options[:background_color] && poi_color(options[:background_color])
+      style.setFillForegroundColor(poi_color(options[:background_color])) 
+      style.setFillBackgroundColor(poi_color(options[:background_color])) 
     end
     
     style.setFont workbook_font
