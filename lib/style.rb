@@ -42,7 +42,7 @@ module Style
 
     if options[:background_color] && poi_color(options[:background_color])
       style.setFillForegroundColor(poi_color(options[:background_color])) 
-      style.setFillBackgroundColor(poi_color(options[:background_color])) 
+      style.setFillPattern 1 
     end
     
     style.setFont workbook_font
