@@ -82,6 +82,11 @@ class TestPoiPond < Test::Unit::TestCase
         assert sheet.getRow(7)
       end
       
+      should "create a row with a height of 666" do
+        assert_equal 666, create_spreadsheet([:sheet => {:name => 'sheet1', 
+                                            :row => [{:row_index => 1, :row_height => 666}]}]).getSheet('sheet1').getRow(1).getHeight
+      end
+      
       should "create cell 1" do
         assert create_spreadsheet([:sheet => {:name => 'sheet1', 
                           :row => [{:row_index => 1, :cell => [{:cell_index => 1}]}]}]).getSheet('sheet1').getRow(1).getCell(1)

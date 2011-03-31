@@ -68,6 +68,7 @@ module POIPond
       if sheet_hash[:sheet][:row] 
         sheet_hash[:sheet][:row].each do |row_hash|
           row = sheet.createRow row_hash[:row_index]
+          row_hash[:row_height] ? row.setHeight(row_hash[:row_height]) : nil
           if row_hash[:cell]
             row_hash[:cell].each do |cell_hash|
               cell = row.createCell cell_hash[:cell_index]
