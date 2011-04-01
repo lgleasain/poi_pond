@@ -38,7 +38,8 @@ module Style
                             style.setTopBorderColor(poi_color options[:border_top_color]) : nil
     options[:border_bottom_color] && poi_color(options[:border_bottom_color]) ? 
                             style.setBottomBorderColor(poi_color options[:border_bottom_color]) : nil
-
+    options[:wrap_text] ? style.setWrapText(options[:wrap_text]) : nil
+    options[:indentation] ? style.setIndention(options[:indentation]) : nil
 
     if options[:border]
       nil_out_runtime_error {

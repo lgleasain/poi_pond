@@ -201,5 +201,13 @@ class TestStyle < Test::Unit::TestCase
       assert_equal create_cell_style(create_excel_workbook, {}).getFillBackgroundColor, style.getFillBackgroundColor
       assert_equal create_cell_style(create_excel_workbook, {}).getFillPattern, style.getFillPattern
     end
+    
+    should "set text wrap to true" do
+      assert create_cell_style(create_excel_workbook, {:wrap_text => true}).getWrapText
+    end
+    
+    should "set indentation to 6" do
+      assert_equal 6, create_cell_style(create_excel_workbook, {:indentation => 6}).getIndention
+    end
   end  
 end
