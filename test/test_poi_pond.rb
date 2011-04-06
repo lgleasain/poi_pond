@@ -143,6 +143,27 @@ class TestPoiPond < Test::Unit::TestCase
         assert_equal 666, sheet.getColumnWidth(1)
         assert_equal 2323, sheet.getColumnWidth(3)
       end
+      
+      should "add a photo to the workbook" do
+        file = File.new(File.join(File.dirname(File.dirname(__FILE__)), 'test', 'image001.jpg')).bytes.to_a
+        workbook = create_spreadsheet([:sheet => {:name => 'sheet1', :photos => [:row => 1, :column => 1, 
+          :photo => file]}])
+        workbook.write(poi_output_file('my_test.xls'))
+        read_workbook = create_excel_workbook poi_input_file('my_test.xls')  
+        assert_equal file, read_workbook.getAllPictures.get(0).getData.bytes.to_a
+        File.delete 'my_test.xls'
+      end
+      
+      should "add multiple photos to the workbook" do
+        file = File.new(File.join(File.dirname(File.dirname(__FILE__)), 'test', 'image001.jpg')).bytes.to_a
+        workbook = create_spreadsheet([:sheet => {:name => 'sheet1', :photos => [{:row => 1, :column => 1, 
+          :photo => file}, {:row => 100, :column => 1, :photo => file}]}])
+        workbook.write(poi_output_file('my_test.xls'))
+        read_workbook = create_excel_workbook poi_input_file('my_test.xls')  
+        assert_equal file, read_workbook.getAllPictures.get(0).getData.bytes.to_a
+        assert_equal file, read_workbook.getAllPictures.get(1).getData.bytes.to_a
+        File.delete 'my_test.xls'
+      end
     end
   end
 end

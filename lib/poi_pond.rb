@@ -60,6 +60,11 @@ module POIPond
                                                                     merged_region[:start_column], merged_region[:end_column])
         end
       end
+      if sheet_hash[:sheet][:photos]
+        sheet_hash[:sheet][:photos].each do |photo|
+          add_photo_to_sheet workbook, sheet_hash[:sheet][:name], photo[:row], photo[:column], photo[:photo]
+        end
+      end
       if sheet_hash[:sheet][:column_widths]
         sheet_hash[:sheet][:column_widths].each do |column_width|
           sheet.setColumnWidth column_width.first, column_width.last
