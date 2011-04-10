@@ -81,7 +81,7 @@ module POIPond
           if row_hash[:cell]
             row_hash[:cell].each do |cell_hash|
               cell = row.createCell cell_hash[:cell_index]
-              cell_hash[:value] ? cell.setCellValue(cell_hash[:value]) : nil
+              cell_hash[:value] ? cell.setCellValue(cell_hash[:value].to_s) : nil
               cell_hash[:style] ? cell.setCellStyle(styles[cell_hash[:style]]) : nil
             end
           end
