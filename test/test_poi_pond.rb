@@ -34,6 +34,10 @@ class TestPoiPond < Test::Unit::TestCase
         assert_equal Rjb::import('java.io.FileOutputStream').new('foo').java_methods, poi_output_file('foo').java_methods
         File.delete 'foo'
       end
+      
+      should "create a byteArrayOutputStream object" do
+        assert_equal Rjb::import('java.io.ByteArrayOutputStream').new.java_methods, poi_byte_array_output_stream.java_methods
+      end
 
       should "create a FileInputStream object" do
         poi_output_file('foo')
