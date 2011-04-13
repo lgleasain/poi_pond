@@ -11,6 +11,58 @@ You will need to have a jvm installed and in your path to work correctly.  At th
 == Conventions 
 This is a light wrapper around POI which is a Java library.  If a method is added by the gem it follows standard Ruby conventions ie: my_method_name.  If a a method is coming directly from the POI java library it follows the Java camel case convention myMethodName.  My thought is that it would make it easier to know where to look for documentation etc. following that approach.  If this really bothers you send me a message or just fork the project and add some wrappers to make things more ruby like.  As long as you have good tests around you code I will be happy to bring the changes back into the main project.
 
+== Usage
+POIPond is currently set up to be a mixin for use in a class.
+
+require 'poi_pond'
+require POIPond 
+
+The primary intended use of this gem at this point is to create a big spreadsheet at one time.  Below is an example of how you would do that.
+when your app starts up you will also need to call
+initialize_poi to get the java classes loaded.
+
+      sheet = create_spreadsheet([:sheet => {:name => 'sheet1', :row => [{:row_index => 1, :cell => [{:cell_index => 1, 
+                                			:style => 'title'}]}]}], 
+								 {'title' => {:font_height => 24}}) 
+
+create_spreadsheet takes a array of sheets and a hash of styles.
+
+each sheet has a hash with a name and an array of rows.  each row contains a row_index which matches up to the excel row number and an array of cells.  Each cell contains an index which matches the excel column number,  a style which matches one of our styles in the style hash and a value which contains the cell's contents.
+
+Here is an example of a style hash.
+
+{'title' => 
+		{:font_height => 24, :font_color => 'DARK_BLUE', :font_name => 'Tahoma', :horizontal_alignment => 'ALIGN_LEFT', 			
+		:vertical_alignment => 'VERTICAL_TOP'}}
+
+This one has one style called 'title'.  The font names come from the available system fonts for the client and the horizontal and vertical alignment values come directly from POI,  see the POI documentation to find the supported values.
+
+now that we have created our spreadsheet lets output it.
+
+sheet.write poi_output_file('my_awesome_poi_spreadsheet.xsl')
+
+poi_output_file take a filename string that you want to write your spreadsheet to.
+
+if you want to send your excel file as a file in a rails app you would do something like this.
+
+excel_byte_array = poi_byte_array_output_stream
+sheet.write excel_byte_array
+
+excel_byte_array is an Java object loaded through rjb so to use it you will need to use the Java call to return a byte array that can be converted to a ruby object like this.
+
+excel_byte_array.toByteArray
+
+if you want to include a photo in your spreadsheet you would do this.
+
+file = File.new('allie2.JPG').bytes.to_a
+sheet = create_spreadsheet([:sheet => {:name => 'sheet1', :photos => [{:row => 10, :column => 1, :photo => file}], 
+							:row => [{:row_index => 1, :cell => [{:cell_index => 1, :style => 'title'}]}]}], 
+							{'title' => {:font_height => 24}}) 
+
+this reads in a file and turns it into a byte array.  POIPond reads the byte array and embeds it in the spreadsheet in the 
+row and column you tell it to place it in.
+
+
 == Contributing to poi_pond
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet

@@ -1,5 +1,4 @@
 require 'helper'
-require 'rjb'
 
 class TestPoiPond < Test::Unit::TestCase
   include POIPond
